@@ -1,0 +1,36 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["mongoDb"]
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DB_URL")
+}
+
+model Ticket {
+    id          String      @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    productId   String
+    amount      Int
+    paymentType PaymentType
+}
+
+model Product {
+    id          String      @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    name        String
+    price       Int
+    description ProductType
+}
+
+enum PaymentType {
+    Visa
+    Mastercard
+}
+
+enum ProductType {
+    Laptops
+    PC
+    Phones
+    Tablets
+    Other
+}
