@@ -16,55 +16,65 @@ router.get("/", (req, res) => {
 
 // **
 // ROUTES TICKET
-// **
+// *
 
-// Get all tickets
-router.get("/ticket", (req, res) => {
-    res.json(ticket.getAll());
-});
+// Get one or all tickets
+router.get("/ticket", async (req, res) => {
+    let result;
 
-// Get a ticket with id = ticketId
-router.get("/ticket/:ticketId", (req, res) => {
-    res.json(ticket.get(req.params.ticketId));
+    if(req.body.id){
+        result = await ticket.get(req.body.id);
+    }else{
+        result = await ticket.getAll();
+    }
+
+    res.status(result.code).json(result);
 });
 
 // Create a new ticket
-router.post("/ticket", (req, res) => {
-    res.json(ticket.create());
+router.post("/ticket", async (req, res) => {
+    const result = await ticket.create(req.body);
+    res.status(result.code).json(result);
 });
 
-// Delete a ticket with id = ticketId
-router.delete("/ticket/:ticketId", (req, res) => {
-    res.json(ticket.delete(req.params.ticketId));
+// Delete a ticket
+router.delete("/ticket", async (req, res) => {
+    const result = await ticket.delete(req.body.id);
+    res.status(result.code).json(result);
 });
 
 // Show the analitycs report
-router.get("/ticket/analitycs", (req, res) => {
-    res.json(ticket.showAnalitycs());
+router.get("/ticket/analitycs", async (req, res) => {
+    const result = await ticket.showAnalitycs();
+    res.status(result.code).json(result);
 });
 
 // **
 // ROUTES PRODUCT
-// **
+// *
 
-// Get a product with id = productId
-router.get("/product/:productId", (req, res) => {
-    res.json(product.get(req.params.productId));
+// Get a product
+router.get("/product", async (req, res) => {
+    const result = await product.get(req.body.id);
+    res.status(result.code).json(result);
 });
 
 // Create a new product
-router.post("/product", (req, res) => {
-    res.json(product.create(req.body));
+router.post("/product", async (req, res) => {
+    const result = await product.create(req.body);
+    res.status(result.code).json(result);
 });
 
-// Update a product with id = productId
-router.put("/product/:productId", (req, res) => {
-    res.json(product.update(req.params.productId));
+// Update a product
+router.put("/product", async (req, res) => {
+    const result = await product.update(req.body);
+    res.status(result.code).json(result);
 });
 
-// Delete a product with id = productId
-router.delete("/product/:productId", (req, res) => {
-    res.json(product.delete(req.params.productId));
+// Delete a product
+router.delete("/product", async (req, res) => {
+    const result = await product.delete(req.body.id);
+    res.status(result.code).json(result);
 });
 
 export default router;

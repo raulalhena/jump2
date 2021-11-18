@@ -5,27 +5,120 @@ const prisma = new PrismaClient();
 
 export default class Product {
 
-    async get(id){
-        return `Get product ${id}`;
+    //**
+    // GET ONE PRODUCT 
+    //*
+    async get(_id){
+        let product;
+        
+        try{
+            product = await prisma.product.findUnique({
+                where: {
+                    id: _id
+                },
+            });
+        }catch(error){
+            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+        }
+
+        if(product){
+            this.manageResult(200, "Product found", product);
+        }else{
+            this.manageResult(400, "Product not found", null);
+        }
+
+        return this.result;
     }
 
+    //**
+    // CREATE A NEW PRODUCT
+    //*
     async create(productData){
-        const newProduct = await prisma.product.create({
-            data: {
-              ...productData
-            },
-        });
+        let newProduct;
+        
+        try{
+            newProduct = await prisma.product.create({
+                data: {
+                ...productData
+                },
+            });
+        }catch(error){
+            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta}`);
+        }
 
-        console.log(newProduct);
-        if(newProduct) return newProduct;
+        if(newProduct){
+            this.manageResult(200, "New product created", newProduct);
+        }else{
+            this.manageResult(500, "Error: product not created", null);
+        }
 
+        return this.result;
     }
 
-    async update(id){
-        return `Updated product ${id}`;
+    //**
+    // UPDATE A PRODUCT
+    //*
+    async update(productData){
+        let updatedProduct;
+
+        try{
+            updatedProduct = await prisma.product.update({
+                where: {
+                    id: productData.id
+                },
+                data: {
+                    ...productData,
+                },
+            });
+        }catch(error){
+            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+        }
+
+        if(updatedProduct){
+            this.manageResult(200, "Product updated successfully", updatedProduct);
+        }else{
+            this.manageResult(400, "Product not updated", null);
+        }
+        
+        return this.result;
     }
 
-    async delete(id){
-        return `Deleted product ${id}`;
+    //**
+    // DELETE A PRODUCT
+    //*
+    async delete(_id){
+        let deletedProduct;
+
+        try{
+            deletedProduct = await prisma.product.delete({
+                where: {
+                    id: _id
+                },
+            });
+        }catch(error){
+            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+        }
+
+        console.log(deletedProduct);
+        if(deletedProduct){
+            this.manageResult(200, "Product deleted successfully", deletedProduct);
+        }else{
+            this.manageResult(400, "Product not deleted", null);
+        } 
+        
+        return this.result;
+    }
+
+    //**
+    // MANAGE RESULT, FILL THE STANDARD RESPONSE OBJECT
+    //*
+    manageResult(code, message, data){
+        this.result = {
+            code,
+            message,
+            data
+        };
+
+        return this.result;
     }
 }

@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-// Middlewares
 app.use(express.json());
 app.use(router);
 
