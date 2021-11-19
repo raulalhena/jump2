@@ -338,6 +338,11 @@ Para poder instalar todo lo necesario a excepción del servidor MySQL hay que se
 ```
 
 ```shell
+    # Imporación esquema BBDD
+    mysql -u usuario -p nombre_basededatos < ./sql/jump2_v1.sql
+```
+
+```shell
     # Ejecución del servidor
     npm run dev
 ```
