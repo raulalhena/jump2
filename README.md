@@ -334,12 +334,24 @@ Para poder instalar todo lo necesario a excepción del servidor MySQL hay que se
 
 ```shell
     # Instalación
-    npm i jump2
+    npm install
 ```
 
 ```shell
-    # Imporación esquema BBDD
-    mysql -u usuario -p nombre_basededatos < ./sql/jump2_v1.sql
+    # Creación de archivo .env en el directorio raíz de la app
+    touch .env
+```
+
+```shell
+    # El archivo .env tendrá las siguientes variables:
+    HOST=http://localhost
+    SERVER_PORT=5000
+    DB_URL=mysql://USUARIO_MYSQL:PASSWORD_MYSQL@localhost:3306/NOMBRE_BBDD
+```
+
+```shell
+    # Imporación esquema una vez creada la BBDD en MySQL
+    mysql -u USUARIO_MYSQL -p NOMBRE_BBDD < ./sql/jump2_v1.sql
 ```
 
 ```shell

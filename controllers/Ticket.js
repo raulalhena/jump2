@@ -18,14 +18,14 @@ export default class Ticket {
             console.error(`==> ERROR: ${error}`);
         }
 
-        if(ticket){
+        if(tickets){
             this.manageResult(200, "Tickets found", tickets);
         }else{
             this.manageResult(400, "Tickets not found", null);
         }
 
         return this.result;
-        
+
     }
 
     //**
