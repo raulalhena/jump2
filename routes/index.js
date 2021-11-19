@@ -4,10 +4,15 @@ import Product from "../controllers/Product.js";
 
 const router = express.Router();
 
+//**
+// Instantiation classes Ticket and Product
+//*
 const ticket = new Ticket();
 const product = new Product();
 
+// **
 // ROOT ROUTE, to check API connection
+// *
 router.get("/", (req, res) => {
     res.status(200).json({
         message: "API connected successfully"
@@ -22,6 +27,8 @@ router.get("/", (req, res) => {
 router.get("/ticket", async (req, res) => {
     let result;
 
+    // If id is passed in req.body, get one ticket, 
+    // if is not, get all tickets
     if(req.body.id){
         result = await ticket.get(req.body.id);
     }else{

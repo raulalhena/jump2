@@ -5,10 +5,15 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
+//**
+// Middlewares
+//*
 app.use(express.json());
 app.use(router);
 
+//**
 // Server listening on port 5000
+//*
 app.listen(process.env.SERVER_PORT || 5000, () => {
     console.log("Listening on port 5000...");
 });

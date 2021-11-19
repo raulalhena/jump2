@@ -6,30 +6,33 @@ const prisma = new PrismaClient();
 export default class Ticket {
 
     //**
-    // GET ALL TICKET 
+    // GET ALL TICKETS 
     //*
     async getAll(){
-        let ticket;
+
+        let tickets;
 
         try{
-            ticket = await prisma.ticket.findMany();
+            tickets = await prisma.ticket.findMany();
         }catch(error){
-            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+            console.error(`==> ERROR: ${error}`);
         }
 
         if(ticket){
-            this.manageResult(200, "Ticket found", ticket);
+            this.manageResult(200, "Tickets found", tickets);
         }else{
-            this.manageResult(400, "Ticket not found", null);
+            this.manageResult(400, "Tickets not found", null);
         }
 
         return this.result;
+        
     }
 
     //**
     // GET SPECIFIC TICKET 
     //*
     async get(_id){
+
         let ticket;
 
         try{
@@ -39,13 +42,13 @@ export default class Ticket {
                 },
             });
         }catch(error){
-            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+            console.error(`==> ERROR: ${error}`);
         }
 
         if(ticket){
             this.manageResult(200, "Ticket found", ticket);
         }else{
-            this.manageResult(400, "Ticket not found", null);
+            this.manageResult(400, "Ticket not found", _id);
         }
 
         return this.result;
@@ -56,6 +59,7 @@ export default class Ticket {
     // CREATE TICKET 
     //*
     async create(ticketData){
+
         let newTicket;
 
         try{
@@ -70,22 +74,24 @@ export default class Ticket {
                 },
             });
         }catch(error){
-            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+            console.error(`==> ERROR: ${error}`);
         }
 
         if(newTicket){
             this.manageResult(200, "New ticket created", newTicket);
         }else{
-            this.manageResult(500, "Error: ticket not created", null);
+            this.manageResult(400, "Error: ticket not created", ticketData);
         }
 
         return this.result;
+
     }
 
     //**
     // DELETE TICKET 
     //*
     async delete(_id){
+
         let deletedTicket;
 
         try{
@@ -95,23 +101,25 @@ export default class Ticket {
                 },
             });
         }catch(error){
-            console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
+            console.error(`==> ERROR: ${error}`);
         }
 
-        console.log(deletedTicket);
         if(deletedTicket){
             this.manageResult(200, "Ticket deleted successfully", deletedTicket);
         }else{
-            this.manageResult(400, "Ticket not deleted", null);
+            this.manageResult(400, "Ticket not deleted", _id);
         } 
         
         return this.result;
+
     }
 
     //**
     // SHOW ANALITYCS 
     //*
     async showAnalitycs(){
+
+        // Initialitations result object to send
         const result = {
             code: 200,
             totalValue: null,
@@ -122,13 +130,13 @@ export default class Ticket {
                 ["Tablets", null],
                 ["Other", null]
             ]),
-            paymentType: null
+            paymentTypes: null
         }
 
         try{
 
             // Getting Payment Type tickets
-            result.paymentType = await prisma.ticket.groupBy({
+            result.paymentTypes = await prisma.ticket.groupBy({
                 by: ["paymentType"],
                 _count: {
                     paymentType: true
@@ -146,8 +154,11 @@ export default class Ticket {
             // Getting all products
             const allProducts = await prisma.product.findMany();
             
+            // Comparing all products with sold products. Getting total value and
+            // number of sold products by type
             allProducts.forEach((product) => {
                 amountProductSold.forEach((soldProduct) => {
+
                     if(product.id === soldProduct.productId){
                         result.totalValue += product.price * soldProduct._sum.amount;
         
@@ -157,22 +168,27 @@ export default class Ticket {
                                 result.numTypeProductSold.get(product.description) + 1
                             );
                         }
+
                     }
                 });
             });
 
         }catch(error) {
-            // console.log(`CODE: ${error.code} \nMESSAGE: ${error.meta.cause}`);
-            console.log(error);
+            console.error(`==> ERROR: ${error}`);
         }
 
+        // Conversion from Map to Object
+        result.numTypeProductSold = Object.fromEntries(result.numTypeProductSold);
+
         return result;
+        
     }
 
     //**
-    // MANAGE RESULT, FILL THE STANDARD RESPONSE OBJECT
+    // MANAGE RESULT, FILL RESPONSE OBJECT
     //*
     manageResult(code, message, data){
+
         this.result = {
             code,
             message,
@@ -180,5 +196,6 @@ export default class Ticket {
         };
 
         return this.result;
+
     }
 }
