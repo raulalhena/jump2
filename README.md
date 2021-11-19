@@ -327,36 +327,42 @@ Para agilizar el desarrollo se ha utilizado el paquete _nodemon_ que se encuentr
 
 Para poder instalar todo lo necesario a excepción del servidor MySQL hay que seguir los siguientes pasos:
 
-```shell
-    # Clonar repositorio
-    git clone https://github.com/raulalhena/jump2.git
-```
+### \# Clonar repositorio
 
 ```shell
-    # Instalación
-    npm install
+git clone https://github.com/raulalhena/jump2.git
 ```
 
-```shell
-    # Creación de archivo .env en el directorio raíz de la app
-    touch .env
-```
+### \# Instalación
 
 ```shell
-    # El archivo .env tendrá las siguientes variables:
-    HOST=http://localhost
-    SERVER_PORT=5000
-    DB_URL=mysql://USUARIO_MYSQL:PASSWORD_MYSQL@localhost:3306/NOMBRE_BBDD
+npm install
 ```
 
-```shell
-    # Imporación esquema una vez creada la BBDD en MySQL
-    mysql -u USUARIO_MYSQL -p NOMBRE_BBDD < ./sql/jump2_v1.sql
-```
+### \# Creación de archivo .env en el directorio raíz de la app
 
 ```shell
-    # Ejecución del servidor
-    npm run dev
+touch .env
+```
+
+### \# El archivo .env tendrá las siguientes variables:
+
+```shell
+HOST=http://localhost
+SERVER_PORT=5000
+DB_URL=mysql://USUARIO_MYSQL:PASSWORD_MYSQL@localhost:3306/NOMBRE_BBDD
+```
+
+### \# Imporación esquema una vez creada la BBDD en MySQL
+
+```shell
+mysql -u USUARIO_MYSQL -p NOMBRE_BBDD < ./sql/jump2_v1.sql
+```
+
+### \# Ejecución del servidor
+
+```shell
+npm run dev
 ```
 
 ## Stack
