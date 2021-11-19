@@ -269,11 +269,11 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
 
 ### Endpoint: /ticket/analitycs
 
-- **GET** - Consulta de Ticket en conjunto con Producto para mostrar informe con los siguientes datos:
+- **GET** - Consulta de Ticket en conjunto con Producto para mostrar informe con los siguientes datos (_método Ticket.analitycs()_):
 
   1. Valor total de los productos vendidos.
   2. El número de productos vendidos por tipo de producto (_description_).
-  3. Cantidad de productos vendidos por tipo de pago (_paymentType_). (_método Ticket.analitycs()_):
+  3. Cantidad de productos vendidos por tipo de pago (_paymentType_).
 
   - Recibe: JSON
     - Parametros:
