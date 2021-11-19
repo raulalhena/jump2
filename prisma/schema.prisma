@@ -12,7 +12,7 @@ model ticket {
     productId   String
     amount      Int?
     paymentType paymentType?
-    product     product      @relation(fields: [productId], references: [id])
+    product     product      @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model product {

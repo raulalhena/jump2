@@ -97,24 +97,35 @@ export default class Product {
         let deletedProduct;
 
         try{
-            const disconnect = await prisma.product.update({
-                where: {
-                    id: _id
-                },
-                data: {
-                    tickets: {
-                        disconnect: true
-                    }
-                },
-            });
-
-            console.log("DISCO", disconnect)
+            // deletedProduct = await prisma.ticket.update({
+            //     where: {
+            //         id: "8ad888c6-612a-41e8-9b86-01fb09d93200"
+            //     },
+            //     data: {
+            //         product: {
+            //             delete: {id: _id}
+            //         }
+            //     },
+            // });
+            // deletedProduct = await prisma.product.update({
+            //     where: {
+            //         id: _id
+            //     },
+            //     data: {
+            //         tickets: {
+            //             product: { disconnect: _id },
+            //             delete: true
+            //         }
+            //     },
+            // });
 
             deletedProduct = await prisma.product.delete({
                 where: {
                     id: _id
                 },
             });
+
+            console.log("DISCO", deletedProduct)
 
         }catch(error){
             console.error(`==> ERROR: ${error}`);
