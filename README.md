@@ -1,6 +1,6 @@
 # Jump2Digital Hackathon Backend
 
-API de control de productos y tickets. Se gestionan tanto productos como tickets a través de diferentes end points que facilitan las tareas básicas de CRUD: **CREAR, CONSULTAR, ACTUALIZAR Y BORRAR**, tienendo un end point para obtener analiticas de pedidos.
+API de control de productos y tickets. Se gestionan tanto productos como tickets a través de diferentes endpoints que facilitan las tareas básicas de CRUD: **CREAR, CONSULTAR, ACTUALIZAR Y BORRAR**, tienendo un endpoint para obtener analiticas de pedidos.
 
 ## Background
 
@@ -22,7 +22,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
 
 ### Endpoint: /producto
 
-- **GET** - Consulta de producto particular (_método Product.get(\_id)_):
+- **GET** - Consulta de producto particular ( _método Product.get(\_id)_ ):
 
   - Recibe: JSON
     - Parametros:
@@ -61,7 +61,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     }
     ```
 
-- **POST** - Crea un nuevo producto (_método Product.create()_):
+- **POST** - Crea un nuevo producto ( _método Product.create()_ ):
 
   - Recibe: JSON
   - Parametros:
@@ -69,14 +69,15 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     - price = Number \- Double, para uso de decimales. \- Requerido
     - description = Enum \- (Valores predeterminados: **_PC, Laptops, Phones, Tablets, Others_**). \- Requerido
   - Devuelve: JSON
-  - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
-  - message = String \- Mensaje de producto creado o de error.
-  - data = Objeto con los datos del producto creado:
 
-    - id
-    - name
-    - price
-    - description
+    - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
+    - message = String \- Mensaje de producto creado o de error.
+    - data = Objeto con los datos del producto creado:
+
+      - id
+      - name
+      - price
+      - description
 
     **Ejemplo:**
 
@@ -94,7 +95,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     }
     ```
 
-- **PUT** \- Actualiza un producto existente (_método Product.update(productData)_):
+- **PUT** \- Actualiza un producto existente ( _método Product.update(productData)_ ):
 
   - Recibe: JSON
   - Parametros, según lo que se quiera modificar:
@@ -103,14 +104,15 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     - price = Number \- Double, para uso de decimales. \- Opcional
     - description = Enum \- (Valores predeterminados: **_PC, Laptops, Phones, Tablets, Others_**). \- Opcional
   - Devuelve: JSON
-  - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
-  - message = String \- Mensaje de producto actualizado o de error.
-  - data = Objeto con los datos del producto actualizado:
 
-    - id
-    - name
-    - price
-    - description
+    - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
+    - message = String \- Mensaje de producto actualizado o de error.
+    - data = Objeto con los datos del producto actualizado:
+
+      - id
+      - name
+      - price
+      - description
 
     **Ejemplo:**
 
@@ -128,20 +130,21 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     }
     ```
 
-- **DELETE** \- Elimina un producto existente (_método Product.delete(\_id)_):
+- **DELETE** \- Elimina un producto existente ( _método Product.delete(\_id)_ ):
 
   - Recibe: JSON
   - Parametros:
     - id = String \- UUID \- Requerido
   - Devuelve: JSON
-  - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
-  - message = String \- Mensaje de producto actualizado o de error.
-  - data = Objeto con los datos del producto eliminado:
 
-    - id
-    - name
-    - price
-    - description
+    - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
+    - message = String \- Mensaje de producto actualizado o de error.
+    - data = Objeto con los datos del producto eliminado:
+
+      - id
+      - name
+      - price
+      - description
 
     **Ejemplo:**
 
@@ -163,7 +166,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
 
 ### Endpoint: /ticket
 
-- **GET** - Consulta de ticket particular o todos los tickets según si recibe el parámetro _id_ o no (_método Ticket.get(\_id) o Ticket.getAll()_):
+- **GET** - Consulta de ticket particular o todos los tickets según si recibe el parámetro _id_ o no ( _método Ticket.get(\_id) o Ticket.getAll()_ ):
 
   - Recibe: JSON
     - Parametros (si es para consulta de un ticket particular):
@@ -203,7 +206,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     }
     ```
 
-- **POST** - Crea un nuevo ticket (_método Ticket.create()_):
+- **POST** - Crea un nuevo ticket ( _método Ticket.create()_ ):
 
   - Recibe: JSON
   - Parametros:
@@ -211,14 +214,15 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     - amount = Number \- Requerido
     - paymentType = Enum \- (Valores predeterminados: **_Mastercard, Visa_**). \- Requeridos
   - Devuelve: JSON
-  - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
-  - message = String \- Mensaje de ticket creado o de error.
-  - data = Objeto con los datos del ticket creado:
 
-    - id
-    - productId
-    - amount
-    - paymentType
+    - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
+    - message = String \- Mensaje de ticket creado o de error.
+    - data = Objeto con los datos del ticket creado:
+
+      - id
+      - productId
+      - amount
+      - paymentType
 
     **Ejemplo:**
 
@@ -236,20 +240,21 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
     }
     ```
 
-- **DELETE** \- Elimina un ticket existente (_método Ticket.delete(\_id)_):
+- **DELETE** \- Elimina un ticket existente ( _método Ticket.delete(\_id)_ ):
 
   - Recibe: JSON
   - Parametros:
     - id = String \- UUID \- Requerido
   - Devuelve: JSON
-  - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
-  - message = String \- Mensaje de producto actualizado o de error.
-  - data = Objeto con los datos del ticket eliminado:
 
-    - id
-    - productId
-    - amount
-    - paymentType
+    - code = Number (Código de estado HTML: **_200 OK, 400 SOLICITUD INCORRECTA, 500 ERROR SERVIDOR_**).
+    - message = String \- Mensaje de producto actualizado o de error.
+    - data = Objeto con los datos del ticket eliminado:
+
+      - id
+      - productId
+      - amount
+      - paymentType
 
     **Ejemplo:**
 
@@ -269,7 +274,7 @@ Descripción de los dos modelos **_Producto y Ticket_** con sus correspondientes
 
 ### Endpoint: /ticket/analitycs
 
-- **GET** - Consulta de Ticket en conjunto con Producto para mostrar informe con los siguientes datos (_método Ticket.analitycs()_):
+- **GET** - Consulta de Ticket en conjunto con Producto para mostrar informe con los siguientes datos ( _método Ticket.analitycs()_ ):
 
   1. Valor total de los productos vendidos.
   2. El número de productos vendidos por tipo de producto (_description_).
@@ -353,7 +358,7 @@ SERVER_PORT=5000
 DB_URL=mysql://USUARIO_MYSQL:PASSWORD_MYSQL@localhost:3306/NOMBRE_BBDD
 ```
 
-### \# Imporación esquema una vez creada la BBDD en MySQL
+### \# Importación esquema una vez creada la BBDD en MySQL
 
 ```shell
 mysql -u USUARIO_MYSQL -p NOMBRE_BBDD < ./sql/jump2_v1.sql
